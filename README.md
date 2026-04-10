@@ -1,53 +1,74 @@
-# MESOTES
+<h1 align="center">MESOTES</h1>
+<p align="center"><strong>MESOTES: An Aristotelian Benchmark for Phronesis and the Doctrine of the Mean</strong></p>
+<p align="center">A research-oriented benchmark for testing whether models can actually reason in an Aristotelian way in concrete situations.</p>
 
-**MESOTES: An Aristotelian Benchmark for Phronesis and the Doctrine of the Mean**
+<p align="center">
+  <a href="https://github.com/hanzhenzhujene/mesotes-benchmark/actions/workflows/tests.yml"><img src="https://github.com/hanzhenzhujene/mesotes-benchmark/actions/workflows/tests.yml/badge.svg" alt="tests"></a>
+  <img src="https://img.shields.io/badge/python-3.11%2B-3776AB" alt="python 3.11+">
+  <img src="https://img.shields.io/badge/stage-research--validation-0A7E3B" alt="research-validation stage">
+  <img src="https://img.shields.io/badge/pilot__v2-32_items-1E88E5" alt="pilot v2 32 items">
+  <img src="https://img.shields.io/badge/counterfactual-8_families-8E24AA" alt="8 counterfactual families">
+  <img src="https://img.shields.io/badge/code%20license-MIT-0B57D0" alt="MIT code license">
+  <img src="https://img.shields.io/badge/data%20license-CC--BY%204.0-6D4C41" alt="CC BY 4.0 data license">
+</p>
 
-[![tests](https://github.com/hanzhenzhujene/mesotes-benchmark/actions/workflows/tests.yml/badge.svg)](https://github.com/hanzhenzhujene/mesotes-benchmark/actions/workflows/tests.yml)
+<p align="center">
+  <a href="#purpose">Purpose</a> •
+  <a href="#project-snapshot">Snapshot</a> •
+  <a href="#what-the-dataset-looks-like">Dataset</a> •
+  <a href="#what-training-or-evaluation-looks-like">Training</a> •
+  <a href="#quickstart">Quickstart</a> •
+  <a href="#where-to-start">Start Here</a>
+</p>
 
 ## Purpose
 
-MESOTES exists to test a simple but important research question:
+MESOTES exists to test a simple but important question:
 
-> Can a model make *Aristotelian* judgments in concrete situations, or does it only produce ethical-sounding language?
+> Can a model make *Aristotelian* judgments in context, or does it only produce ethical-sounding language?
 
-Most morality benchmarks mostly reward verdicts. MESOTES is built to reward something harder:
+Most moral benchmarks mainly reward verdicts. MESOTES is built to reward something deeper:
 
-- identifying the right sphere of action or feeling
+- finding the relevant sphere of action or feeling
 - distinguishing deficiency, excess, and the mean
 - rejecting fake moderation
-- knowing when more information is needed
-- recognizing when "choose the middle" is the wrong heuristic entirely
+- noticing when the right answer depends on missing particulars
+- recognizing when some acts should not be treated as admitting a mean at all
 
-The benchmark is meant to expose a familiar failure mode in language models:
+The benchmark is designed to expose a specific failure mode:
 
-> a model can sound wise, balanced, and morally fluent while still missing what is actually salient.
+> a model can sound balanced, prudent, and morally fluent while still missing what is actually salient.
 
-## What The Reader Should Take Away
+## What You Should Remember
 
-If you remember only three things about this repository, they should be these:
+If you only take away three things from this repository, they should be these:
 
 1. **MESOTES is not a generic right/wrong dataset.** It is a framework-fidelity benchmark for Aristotelian reasoning.
-2. **The core enemy is false moderation.** Many models prefer the balanced-looking answer even when it is not the mean.
-3. **The benchmark tests change, not just correctness.** Counterfactual families ask whether a model stays stable when it should and changes when it should.
-
-## What This Repo Is For
-
-MESOTES is useful if you want to:
-
-- evaluate whether a model tracks Aristotelian structure rather than generic morality
-- stress-test false midpoint failures
-- study information-gap recognition and phronesis-sensitive reasoning
-- analyze person-relative and role-relative changes
-- run prompt baselines with a structured moral ontology
-- build toward a publishable, adjudicated benchmark release
+2. **The benchmark is built to catch false moderation.** Many models prefer the balanced-looking answer even when it is not the mean.
+3. **MESOTES tests change, not only correctness.** Counterfactual families ask whether a model stays stable when it should and changes when it should.
 
 ## Why MESOTES Is Different
 
 | Typical moral benchmark question | MESOTES question |
 | --- | --- |
 | "Which action is morally best?" | "What is the relevant sphere, and what counts as deficiency, excess, and the mean here?" |
-| "Can the model predict the accepted verdict?" | "Can the model track salience, proportion, role, and context?" |
-| "Does the model look ethical?" | "Does the model reason in a specifically Aristotelian way?" |
+| "Can the model predict an accepted verdict?" | "Can the model track salience, proportion, role, and context?" |
+| "Does the model sound ethical?" | "Does the model reason in a specifically Aristotelian way?" |
+
+## Project Snapshot
+
+The stronger illustrative release, `pilot_v2`, currently contains:
+
+```mermaid
+flowchart LR
+    A["pilot_v2<br/>32 illustrative items"] --> B["8 core spheres"]
+    A --> C["8 counterfactual families"]
+    A --> D["30 explicit false-midpoint cases"]
+    A --> E["7 needs-more-info cases"]
+    A --> F["6 no-mean exceptions"]
+```
+
+This is a dataset overview, not a benchmark result claim.
 
 ## The Core Logic
 
@@ -61,7 +82,7 @@ flowchart LR
     F --> G["Test robustness across counterfactual families"]
 ```
 
-## What The Dataset Actually Looks Like
+## What The Dataset Looks Like
 
 Every MESOTES item is a concrete situation with:
 
@@ -113,19 +134,15 @@ Every MESOTES item is a concrete situation with:
 }
 ```
 
-### How to read that record
+### How To Read That Record
 
 - The case is about **wealth/resource use**
-- `a4` is the trap because it sounds balanced but ignores what is proportionate *for this agent*
+- `a4` is a trap because it sounds balanced but ignores what is proportionate *for this agent*
 - the family metadata means this item belongs to a counterfactual set where the same outward donation options are tested under a different agent profile
 
 ## What Training Or Evaluation Looks Like
 
-MESOTES currently ships baseline experiment utilities and prompt export. It does **not** claim a final training recipe or benchmark result.
-
-Still, the workflow is concrete and usable.
-
-### End-to-end workflow
+MESOTES already supports a realistic baseline workflow, even though it does **not** claim a final training recipe or benchmark result.
 
 ```mermaid
 flowchart LR
@@ -137,7 +154,7 @@ flowchart LR
 
 ### Prompt-ready example
 
-The repository can export a scenario into prompt-ready JSONL for baseline experiments.
+The repository can export a scenario into prompt-ready JSONL for LLM evaluation:
 
 ```json
 {
@@ -158,17 +175,9 @@ The repository can export a scenario into prompt-ready JSONL for baseline experi
 }
 ```
 
-### What a minimal training-style setup looks like
+### Minimal training-style target
 
-If you wanted to run a supervised or instruction-tuning style experiment, the shape would look like this:
-
-1. Use `train.jsonl` or `dev.jsonl` as labeled source data.
-2. Convert records into prompt/target pairs with the MESOTES prediction schema.
-3. Train or fine-tune a model to emit structured outputs.
-4. Evaluate on held-out items with `scripts/evaluate_predictions.py`.
-5. Inspect core metrics and family metrics together.
-
-Conceptually, the target output would look like:
+If you run a supervised or instruction-tuning style setup, the target shape looks like this:
 
 ```json
 {
@@ -184,9 +193,11 @@ Conceptually, the target output would look like:
 }
 ```
 
-That is the benchmark's practical unit of learning and evaluation: not a single moral verdict, but a structured judgment.
+That is MESOTES's practical unit of learning and evaluation: not a single moral verdict, but a structured judgment.
 
-## The Kind Of Failure MESOTES Wants To Catch
+For the fuller workflow, see [docs/training_workflow.md](docs/training_workflow.md).
+
+## A Concrete Failure MESOTES Wants To Catch
 
 Imagine a release lead who discovers a hidden deployment blocker one hour before launch.
 
@@ -210,7 +221,7 @@ But it still misses the point because:
 
 That is MESOTES in miniature.
 
-## What You Can Do In This Repo Right Now
+## Quickstart
 
 | Task | Command |
 | --- | --- |
@@ -220,6 +231,8 @@ That is MESOTES in miniature.
 | Export prompt-ready JSONL | `python scripts/export_model_prompts.py data/pilot_v2/test_inputs.jsonl data/pilot_v2/prompts_ontology.jsonl --condition ontology_primed` |
 | Summarize adjudication metadata | `python scripts/adjudication_report.py data/pilot_v2/train.jsonl data/pilot_v2/dev.jsonl data/pilot_v2/test_labels.jsonl` |
 | Build a markdown report | `python scripts/make_benchmark_report.py data/pilot_v2/train.jsonl data/pilot_v2/dev.jsonl data/pilot_v2/test_labels.jsonl --predictions data/pilot_v2/mock_predictions.jsonl --gold data/pilot_v2/test_labels.jsonl` |
+
+For a more guided path, start with [docs/quickstart.md](docs/quickstart.md).
 
 ## Two Pilot Releases
 
@@ -258,7 +271,7 @@ If you are new to the project:
 1. Read [docs/project_overview.md](docs/project_overview.md) for the research framing.
 2. Read [docs/examples.md](docs/examples.md) for concrete benchmark walkthroughs.
 3. Read [docs/quickstart.md](docs/quickstart.md) for the practical workflow.
-4. Read [docs/training_workflow.md](docs/training_workflow.md) if you want to see how dataset records become model inputs and structured targets.
+4. Read [docs/training_workflow.md](docs/training_workflow.md) for dataset-to-model examples.
 
 ## Repository Map
 
@@ -274,6 +287,16 @@ If you are new to the project:
 - [annotation/guidelines.md](annotation/guidelines.md)
 - [annotation/adjudication.md](annotation/adjudication.md)
 - [annotation/disagreement_templates.md](annotation/disagreement_templates.md)
+- [LICENSES.md](LICENSES.md)
+
+## Licensing
+
+This repository uses a split license structure:
+
+- code and tooling are released under MIT
+- dataset artifacts are released under CC BY 4.0
+
+For the formal licensing summary, attribution guidance, and scope notes, see [LICENSES.md](LICENSES.md).
 
 ## Research Posture
 
@@ -283,8 +306,3 @@ This repository is intentionally careful.
 - It does not treat the included pilots as final gold.
 - It preserves disagreement rather than hiding it.
 - It is built to be useful now, while remaining honest about what is still illustrative.
-
-## License
-
-- Code and tooling: MIT, see [LICENSE](LICENSE)
-- Released dataset artifacts: CC BY 4.0, see [LICENSE-data](LICENSE-data)
