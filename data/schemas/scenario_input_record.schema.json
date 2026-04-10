@@ -1,0 +1,222 @@
+{
+  "$defs": {
+    "AgentProfile": {
+      "additionalProperties": false,
+      "description": "The agent-facing profile that makes person-relative judgment possible.",
+      "properties": {
+        "role": {
+          "minLength": 1,
+          "title": "Role",
+          "type": "string"
+        },
+        "experience_level": {
+          "minLength": 1,
+          "title": "Experience Level",
+          "type": "string"
+        },
+        "resource_position": {
+          "minLength": 1,
+          "title": "Resource Position",
+          "type": "string"
+        },
+        "power_relation": {
+          "minLength": 1,
+          "title": "Power Relation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "experience_level",
+        "resource_position",
+        "power_relation"
+      ],
+      "title": "AgentProfile",
+      "type": "object"
+    },
+    "CandidateAction": {
+      "additionalProperties": false,
+      "description": "A candidate response offered for a benchmark scenario.",
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "text"
+      ],
+      "title": "CandidateAction",
+      "type": "object"
+    },
+    "CoreSphere": {
+      "enum": [
+        "fear_confidence",
+        "pleasure_appetite",
+        "wealth_resource_use",
+        "honor_recognition",
+        "anger_response",
+        "truthfulness_self_presentation",
+        "amusement_humor",
+        "social_pleasantness"
+      ],
+      "title": "CoreSphere",
+      "type": "string"
+    },
+    "ExplanationTag": {
+      "enum": [
+        "timing_sensitive",
+        "motive_sensitive",
+        "manner_sensitive",
+        "relationship_sensitive",
+        "role_obligation",
+        "resource_relative",
+        "stakes_asymmetric",
+        "public_private_difference",
+        "history_sensitive",
+        "justice_constraint",
+        "object_kind_exception"
+      ],
+      "title": "ExplanationTag",
+      "type": "string"
+    },
+    "MetaRecord": {
+      "additionalProperties": false,
+      "description": "Metadata about provenance and release status.",
+      "properties": {
+        "source_type": {
+          "minLength": 1,
+          "title": "Source Type",
+          "type": "string"
+        },
+        "adjudication_status": {
+          "minLength": 1,
+          "title": "Adjudication Status",
+          "type": "string"
+        },
+        "difficulty": {
+          "minLength": 1,
+          "title": "Difficulty",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_type",
+        "adjudication_status",
+        "difficulty"
+      ],
+      "title": "MetaRecord",
+      "type": "object"
+    },
+    "Split": {
+      "enum": [
+        "train",
+        "dev",
+        "test"
+      ],
+      "title": "Split",
+      "type": "string"
+    },
+    "VariantType": {
+      "enum": [
+        "base",
+        "minimal_pair",
+        "irrelevant_detail_shift",
+        "salience_shift",
+        "agent_shift",
+        "role_shift"
+      ],
+      "title": "VariantType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "An unlabeled scenario record for blind evaluation.",
+  "properties": {
+    "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+    },
+    "split": {
+      "$ref": "#/$defs/Split"
+    },
+    "domain": {
+      "minLength": 1,
+      "title": "Domain",
+      "type": "string"
+    },
+    "scenario": {
+      "minLength": 1,
+      "title": "Scenario",
+      "type": "string"
+    },
+    "agent_profile": {
+      "$ref": "#/$defs/AgentProfile"
+    },
+    "primary_sphere": {
+      "$ref": "#/$defs/CoreSphere"
+    },
+    "family_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Family Id"
+    },
+    "variant_type": {
+      "$ref": "#/$defs/VariantType",
+      "default": "base"
+    },
+    "secondary_considerations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Secondary Considerations",
+      "type": "array"
+    },
+    "relevant_factors": {
+      "items": {
+        "$ref": "#/$defs/ExplanationTag"
+      },
+      "title": "Relevant Factors",
+      "type": "array"
+    },
+    "candidate_actions": {
+      "items": {
+        "$ref": "#/$defs/CandidateAction"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Candidate Actions",
+      "type": "array"
+    },
+    "meta": {
+      "$ref": "#/$defs/MetaRecord"
+    }
+  },
+  "required": [
+    "id",
+    "split",
+    "domain",
+    "scenario",
+    "agent_profile",
+    "primary_sphere",
+    "candidate_actions",
+    "meta"
+  ],
+  "title": "ScenarioInputRecord",
+  "type": "object"
+}

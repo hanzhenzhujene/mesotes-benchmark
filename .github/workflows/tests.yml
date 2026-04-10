@@ -1,0 +1,32 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install package
+        run: python -m pip install -e ".[dev]"
+      - name: Validate pilot data
+        run: |
+          python scripts/validate_dataset.py \
+            data/pilot/train.jsonl \
+            data/pilot/dev.jsonl \
+            data/pilot/test_inputs.jsonl \
+            data/pilot/test_labels.jsonl
+      - name: Validate pilot v2 data
+        run: |
+          python scripts/validate_dataset.py \
+            data/pilot_v2/train.jsonl \
+            data/pilot_v2/dev.jsonl \
+            data/pilot_v2/test_inputs.jsonl \
+            data/pilot_v2/test_labels.jsonl
+      - name: Run tests
+        run: pytest

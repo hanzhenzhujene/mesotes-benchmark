@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: "MESOTES: An Aristotelian Benchmark for Phronesis and the Doctrine of the Mean"
+message: "If you use this repository, please cite it using the metadata below."
+type: software
+authors:
+  - family-names: Zhu
+    given-names: Hanzhen
+    email: hanzhen@umich.edu
+license: MIT
+keywords:
+  - Aristotelian ethics
+  - moral reasoning
+  - benchmark
+  - phronesis
+  - doctrine of the mean
+abstract: >-
+  MESOTES is a research scaffold for building an Aristotelian benchmark that
+  evaluates framework fidelity rather than generic moral verdict prediction.

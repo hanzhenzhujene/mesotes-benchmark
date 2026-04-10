@@ -1,0 +1,140 @@
+{
+  "$defs": {
+    "CoreSphere": {
+      "enum": [
+        "fear_confidence",
+        "pleasure_appetite",
+        "wealth_resource_use",
+        "honor_recognition",
+        "anger_response",
+        "truthfulness_self_presentation",
+        "amusement_humor",
+        "social_pleasantness"
+      ],
+      "title": "CoreSphere",
+      "type": "string"
+    },
+    "ExplanationTag": {
+      "enum": [
+        "timing_sensitive",
+        "motive_sensitive",
+        "manner_sensitive",
+        "relationship_sensitive",
+        "role_obligation",
+        "resource_relative",
+        "stakes_asymmetric",
+        "public_private_difference",
+        "history_sensitive",
+        "justice_constraint",
+        "object_kind_exception"
+      ],
+      "title": "ExplanationTag",
+      "type": "string"
+    },
+    "PhronesisSalience": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "title": "PhronesisSalience",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Model predictions aligned with the benchmark's evaluable fields.",
+  "properties": {
+    "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+    },
+    "primary_sphere": {
+      "$ref": "#/$defs/CoreSphere"
+    },
+    "relevant_factors": {
+      "items": {
+        "$ref": "#/$defs/ExplanationTag"
+      },
+      "title": "Relevant Factors",
+      "type": "array"
+    },
+    "deficiency_action_id": {
+      "minLength": 1,
+      "title": "Deficiency Action Id",
+      "type": "string"
+    },
+    "excess_action_id": {
+      "minLength": 1,
+      "title": "Excess Action Id",
+      "type": "string"
+    },
+    "mean_action_id": {
+      "minLength": 1,
+      "title": "Mean Action Id",
+      "type": "string"
+    },
+    "false_midpoint_action_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "False Midpoint Action Id"
+    },
+    "mean_not_midpoint_tags": {
+      "items": {
+        "$ref": "#/$defs/ExplanationTag"
+      },
+      "title": "Mean Not Midpoint Tags",
+      "type": "array"
+    },
+    "phronesis_salience": {
+      "$ref": "#/$defs/PhronesisSalience"
+    },
+    "needs_more_info": {
+      "title": "Needs More Info",
+      "type": "boolean"
+    },
+    "missing_information_fields": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Information Fields",
+      "type": "array"
+    },
+    "no_mean_exception": {
+      "title": "No Mean Exception",
+      "type": "boolean"
+    },
+    "short_rationale": {
+      "anyOf": [
+        {
+          "minLength": 1,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Short Rationale"
+    }
+  },
+  "required": [
+    "id",
+    "primary_sphere",
+    "deficiency_action_id",
+    "excess_action_id",
+    "mean_action_id",
+    "phronesis_salience",
+    "needs_more_info",
+    "no_mean_exception"
+  ],
+  "title": "PredictionRecord",
+  "type": "object"
+}

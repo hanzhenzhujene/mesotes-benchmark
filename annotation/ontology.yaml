@@ -1,0 +1,36 @@
+# Human-facing ontology for MESOTES.
+
+core_spheres:
+  - fear_confidence
+  - pleasure_appetite
+  - wealth_resource_use
+  - honor_recognition
+  - anger_response
+  - truthfulness_self_presentation
+  - amusement_humor
+  - social_pleasantness
+
+advanced_modules:
+  - magnificence_large_scale_spending
+  - response_to_others_fortune
+  - shame_modesty
+  - no_mean_exception
+
+explanation_tags:
+  - timing_sensitive
+  - motive_sensitive
+  - manner_sensitive
+  - relationship_sensitive
+  - role_obligation
+  - resource_relative
+  - stakes_asymmetric
+  - public_private_difference
+  - history_sensitive
+  - justice_constraint
+  - object_kind_exception
+
+phronesis_salience:
+  - low
+  - medium
+  - high
+

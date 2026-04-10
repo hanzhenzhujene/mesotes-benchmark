@@ -1,0 +1,378 @@
+{
+  "$defs": {
+    "AgentProfile": {
+      "additionalProperties": false,
+      "description": "The agent-facing profile that makes person-relative judgment possible.",
+      "properties": {
+        "role": {
+          "minLength": 1,
+          "title": "Role",
+          "type": "string"
+        },
+        "experience_level": {
+          "minLength": 1,
+          "title": "Experience Level",
+          "type": "string"
+        },
+        "resource_position": {
+          "minLength": 1,
+          "title": "Resource Position",
+          "type": "string"
+        },
+        "power_relation": {
+          "minLength": 1,
+          "title": "Power Relation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "role",
+        "experience_level",
+        "resource_position",
+        "power_relation"
+      ],
+      "title": "AgentProfile",
+      "type": "object"
+    },
+    "AnnotationConfidence": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "title": "AnnotationConfidence",
+      "type": "string"
+    },
+    "CandidateAction": {
+      "additionalProperties": false,
+      "description": "A candidate response offered for a benchmark scenario.",
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "title": "Id",
+          "type": "string"
+        },
+        "text": {
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "text"
+      ],
+      "title": "CandidateAction",
+      "type": "object"
+    },
+    "CoreSphere": {
+      "enum": [
+        "fear_confidence",
+        "pleasure_appetite",
+        "wealth_resource_use",
+        "honor_recognition",
+        "anger_response",
+        "truthfulness_self_presentation",
+        "amusement_humor",
+        "social_pleasantness"
+      ],
+      "title": "CoreSphere",
+      "type": "string"
+    },
+    "DisagreementFlag": {
+      "enum": [
+        "sphere_dispute",
+        "mean_dispute",
+        "phronesis_dispute",
+        "false_midpoint_dispute",
+        "needs_more_info_dispute",
+        "no_mean_exception_dispute",
+        "factor_salience_dispute"
+      ],
+      "title": "DisagreementFlag",
+      "type": "string"
+    },
+    "ExplanationTag": {
+      "enum": [
+        "timing_sensitive",
+        "motive_sensitive",
+        "manner_sensitive",
+        "relationship_sensitive",
+        "role_obligation",
+        "resource_relative",
+        "stakes_asymmetric",
+        "public_private_difference",
+        "history_sensitive",
+        "justice_constraint",
+        "object_kind_exception"
+      ],
+      "title": "ExplanationTag",
+      "type": "string"
+    },
+    "GoldLabels": {
+      "additionalProperties": false,
+      "description": "Adjudicated labels and label-quality metadata for a scenario.",
+      "properties": {
+        "deficiency_action_id": {
+          "minLength": 1,
+          "title": "Deficiency Action Id",
+          "type": "string"
+        },
+        "excess_action_id": {
+          "minLength": 1,
+          "title": "Excess Action Id",
+          "type": "string"
+        },
+        "mean_action_id": {
+          "minLength": 1,
+          "title": "Mean Action Id",
+          "type": "string"
+        },
+        "false_midpoint_action_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "False Midpoint Action Id"
+        },
+        "mean_not_midpoint_tags": {
+          "items": {
+            "$ref": "#/$defs/ExplanationTag"
+          },
+          "title": "Mean Not Midpoint Tags",
+          "type": "array"
+        },
+        "phronesis_salience": {
+          "$ref": "#/$defs/PhronesisSalience"
+        },
+        "needs_more_info": {
+          "title": "Needs More Info",
+          "type": "boolean"
+        },
+        "missing_information_fields": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Missing Information Fields",
+          "type": "array"
+        },
+        "no_mean_exception": {
+          "title": "No Mean Exception",
+          "type": "boolean"
+        },
+        "short_rationale": {
+          "minLength": 1,
+          "title": "Short Rationale",
+          "type": "string"
+        },
+        "annotation_confidence": {
+          "$ref": "#/$defs/AnnotationConfidence",
+          "default": "medium"
+        },
+        "disagreement_flags": {
+          "items": {
+            "$ref": "#/$defs/DisagreementFlag"
+          },
+          "title": "Disagreement Flags",
+          "type": "array"
+        },
+        "adjudication_note": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Adjudication Note"
+        },
+        "author_intended_trap_type": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TrapType"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        }
+      },
+      "required": [
+        "deficiency_action_id",
+        "excess_action_id",
+        "mean_action_id",
+        "phronesis_salience",
+        "needs_more_info",
+        "no_mean_exception",
+        "short_rationale"
+      ],
+      "title": "GoldLabels",
+      "type": "object"
+    },
+    "MetaRecord": {
+      "additionalProperties": false,
+      "description": "Metadata about provenance and release status.",
+      "properties": {
+        "source_type": {
+          "minLength": 1,
+          "title": "Source Type",
+          "type": "string"
+        },
+        "adjudication_status": {
+          "minLength": 1,
+          "title": "Adjudication Status",
+          "type": "string"
+        },
+        "difficulty": {
+          "minLength": 1,
+          "title": "Difficulty",
+          "type": "string"
+        }
+      },
+      "required": [
+        "source_type",
+        "adjudication_status",
+        "difficulty"
+      ],
+      "title": "MetaRecord",
+      "type": "object"
+    },
+    "PhronesisSalience": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "title": "PhronesisSalience",
+      "type": "string"
+    },
+    "Split": {
+      "enum": [
+        "train",
+        "dev",
+        "test"
+      ],
+      "title": "Split",
+      "type": "string"
+    },
+    "TrapType": {
+      "enum": [
+        "false_balance",
+        "timid_delay",
+        "numeric_split",
+        "vague_half_truth",
+        "role_avoidance",
+        "public_private_blur"
+      ],
+      "title": "TrapType",
+      "type": "string"
+    },
+    "VariantType": {
+      "enum": [
+        "base",
+        "minimal_pair",
+        "irrelevant_detail_shift",
+        "salience_shift",
+        "agent_shift",
+        "role_shift"
+      ],
+      "title": "VariantType",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "A fully labeled scenario record.",
+  "properties": {
+    "id": {
+      "minLength": 1,
+      "title": "Id",
+      "type": "string"
+    },
+    "split": {
+      "$ref": "#/$defs/Split"
+    },
+    "domain": {
+      "minLength": 1,
+      "title": "Domain",
+      "type": "string"
+    },
+    "scenario": {
+      "minLength": 1,
+      "title": "Scenario",
+      "type": "string"
+    },
+    "agent_profile": {
+      "$ref": "#/$defs/AgentProfile"
+    },
+    "primary_sphere": {
+      "$ref": "#/$defs/CoreSphere"
+    },
+    "family_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Family Id"
+    },
+    "variant_type": {
+      "$ref": "#/$defs/VariantType",
+      "default": "base"
+    },
+    "secondary_considerations": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Secondary Considerations",
+      "type": "array"
+    },
+    "relevant_factors": {
+      "items": {
+        "$ref": "#/$defs/ExplanationTag"
+      },
+      "title": "Relevant Factors",
+      "type": "array"
+    },
+    "candidate_actions": {
+      "items": {
+        "$ref": "#/$defs/CandidateAction"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "title": "Candidate Actions",
+      "type": "array"
+    },
+    "meta": {
+      "$ref": "#/$defs/MetaRecord"
+    },
+    "gold": {
+      "$ref": "#/$defs/GoldLabels"
+    }
+  },
+  "required": [
+    "id",
+    "split",
+    "domain",
+    "scenario",
+    "agent_profile",
+    "primary_sphere",
+    "candidate_actions",
+    "meta",
+    "gold"
+  ],
+  "title": "ScenarioRecord",
+  "type": "object"
+}
