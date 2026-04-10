@@ -8,6 +8,8 @@ The baseline suite is meant to answer a modest question:
 
 How much do structured Aristotelian prompting choices change performance on MESOTES-style tasks, especially on false-midpoint traps, information-gap cases, and counterfactual families?
 
+If you want to see how records become prompt/target pairs in practice, pair this document with [docs/training_workflow.md](training_workflow.md).
+
 ## Common evaluation setup
 
 For all baseline conditions:
@@ -17,6 +19,14 @@ For all baseline conditions:
 - keep temperature, decoding limits, and post-processing rules constant where possible
 - score the runs against the same gold split
 - separate illustrative pilot runs from any later benchmark-ready release
+
+Useful minimal loop:
+
+1. export prompt-ready JSONL
+2. run the model
+3. collect predictions in `PredictionRecord` format
+4. evaluate with `scripts/evaluate_predictions.py`
+5. summarize with `scripts/make_benchmark_report.py`
 
 ## Condition 1: Direct answer
 

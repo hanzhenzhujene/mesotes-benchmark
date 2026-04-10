@@ -4,113 +4,222 @@
 
 [![tests](https://github.com/hanzhenzhujene/mesotes-benchmark/actions/workflows/tests.yml/badge.svg)](https://github.com/hanzhenzhujene/mesotes-benchmark/actions/workflows/tests.yml)
 
-MESOTES is a research-oriented benchmark for a specific question:
+## Purpose
 
-> Can a model reason *Aristotelianly* in concrete situations, or does it only sound morally fluent?
+MESOTES exists to test a simple but important research question:
 
-Most moral benchmarks reward verdicts. MESOTES is built to reward *judgment structure*:
+> Can a model make *Aristotelian* judgments in concrete situations, or does it only produce ethical-sounding language?
 
-- finding the relevant sphere of action or feeling
+Most morality benchmarks mostly reward verdicts. MESOTES is built to reward something harder:
+
+- identifying the right sphere of action or feeling
 - distinguishing deficiency, excess, and the mean
 - rejecting fake moderation
-- noticing when the right answer depends on missing particulars
-- recognizing when some acts should not be treated as admitting a mean at all
+- knowing when more information is needed
+- recognizing when "choose the middle" is the wrong heuristic entirely
 
-That makes MESOTES narrower than a generic morality benchmark, but also sharper. It is designed to catch a familiar failure mode in LLMs: sounding wise while missing what actually matters.
+The benchmark is meant to expose a familiar failure mode in language models:
 
-## Why This Repo Matters
+> a model can sound wise, balanced, and morally fluent while still missing what is actually salient.
 
-MESOTES is trying to measure a deeper capability than "pick the ethical option."
+## What The Reader Should Take Away
 
-The benchmark tests whether a model can:
+If you remember only three things about this repository, they should be these:
 
-- read a concrete situation and identify the *right moral dimension*
-- tell the difference between a true Aristotelian mean and a merely moderate-looking compromise
-- stay stable when only irrelevant details change
-- change when salient facts, roles, or agent capacities change
-- admit when more information is needed
+1. **MESOTES is not a generic right/wrong dataset.** It is a framework-fidelity benchmark for Aristotelian reasoning.
+2. **The core enemy is false moderation.** Many models prefer the balanced-looking answer even when it is not the mean.
+3. **The benchmark tests change, not just correctness.** Counterfactual families ask whether a model stays stable when it should and changes when it should.
 
-The central practical takeaway is simple:
+## What This Repo Is For
 
-> A model can give polished ethical language and still fail at Aristotelian reasoning if it cannot track salience, role, proportion, and context.
+MESOTES is useful if you want to:
 
-## What You Can Do Here
+- evaluate whether a model tracks Aristotelian structure rather than generic morality
+- stress-test false midpoint failures
+- study information-gap recognition and phronesis-sensitive reasoning
+- analyze person-relative and role-relative changes
+- run prompt baselines with a structured moral ontology
+- build toward a publishable, adjudicated benchmark release
 
-With the current repository, you can:
+## Why MESOTES Is Different
 
-- validate MESOTES dataset files
-- inspect two illustrative pilot datasets
-- run evaluation on structured predictions
-- measure counterfactual family behavior
-- export prompt-ready JSONL for baseline experiments
-- summarize disagreement and adjudication metadata
-- generate markdown benchmark reports
-
-## At a Glance
-
-| Area | What it adds |
+| Typical moral benchmark question | MESOTES question |
 | --- | --- |
-| Structured schemas | Scenario, input, and prediction records with strict validation |
-| Aristotelian labels | Sphere, deficiency, excess, mean, false midpoint, phronesis, no-mean exception |
-| Counterfactual families | Test nuisance invariance and salience responsiveness |
-| Adjudication metadata | Confidence, disagreement flags, adjudication notes |
-| Experiment utilities | Prompt export, evaluation scripts, report generation |
+| "Which action is morally best?" | "What is the relevant sphere, and what counts as deficiency, excess, and the mean here?" |
+| "Can the model predict the accepted verdict?" | "Can the model track salience, proportion, role, and context?" |
+| "Does the model look ethical?" | "Does the model reason in a specifically Aristotelian way?" |
 
-## The Benchmark Logic
+## The Core Logic
 
 ```mermaid
 flowchart LR
-    A["Concrete scenario"] --> B["Identify the relevant sphere"]
-    B --> C["Classify deficiency / excess / mean"]
+    A["Concrete scenario"] --> B["Find the relevant sphere"]
+    B --> C["Label deficiency / excess / mean"]
     C --> D["Reject false midpoint traps"]
-    D --> E["Judge whether more information is needed"]
+    D --> E["Check whether more information is needed"]
     E --> F["Check for no-mean exceptions"]
-    F --> G["Evaluate robustness across counterfactual families"]
+    F --> G["Test robustness across counterfactual families"]
 ```
 
-## The Core Idea in One Example
+## What The Dataset Actually Looks Like
 
-A model that always chooses the "balanced-looking" answer will fail on MESOTES.
+Every MESOTES item is a concrete situation with:
 
-Consider a release lead who discovers a hidden deployment blocker one hour before launch:
+- a scenario
+- an agent profile
+- four candidate actions
+- structured Aristotelian labels
+- optional family metadata for counterfactual analysis
+- annotation-confidence and disagreement metadata
 
-- `deficiency`: stay quiet and hope the issue disappears
-- `excess`: expose the teammate publicly in front of the whole group
-- `false midpoint`: vaguely hint at a problem but keep the launch moving
-- `mean`: pause the release, notify the right people, and address the teammate firmly but privately
+### Example record
 
-The key point is not "be moderate." The key point is:
+```json
+{
+  "id": "mesotes_v2_test_0001",
+  "split": "test",
+  "domain": "friendship",
+  "family_id": "family-donation-capacity",
+  "variant_type": "base",
+  "scenario": "A graduate student living on a tight stipend gets a late-night message that a close friend's younger brother needs help covering emergency surgery.",
+  "agent_profile": {
+    "role": "graduate_student",
+    "experience_level": "moderate",
+    "resource_position": "tight_budget",
+    "power_relation": "peer_friend"
+  },
+  "primary_sphere": "wealth_resource_use",
+  "relevant_factors": [
+    "resource_relative",
+    "relationship_sensitive",
+    "motive_sensitive"
+  ],
+  "candidate_actions": [
+    { "id": "a1", "text": "Decline and send a brief message wishing the family well." },
+    { "id": "a2", "text": "Send $3,000 tonight without checking your own obligations." },
+    { "id": "a3", "text": "Send $75 now and offer to circulate the fundraiser tomorrow." },
+    { "id": "a4", "text": "Send $250 because it sounds like a balanced amount." }
+  ],
+  "gold": {
+    "deficiency_action_id": "a1",
+    "excess_action_id": "a2",
+    "mean_action_id": "a3",
+    "false_midpoint_action_id": "a4",
+    "phronesis_salience": "medium",
+    "needs_more_info": false,
+    "no_mean_exception": false,
+    "annotation_confidence": "high"
+  }
+}
+```
+
+### How to read that record
+
+- The case is about **wealth/resource use**
+- `a4` is the trap because it sounds balanced but ignores what is proportionate *for this agent*
+- the family metadata means this item belongs to a counterfactual set where the same outward donation options are tested under a different agent profile
+
+## What Training Or Evaluation Looks Like
+
+MESOTES currently ships baseline experiment utilities and prompt export. It does **not** claim a final training recipe or benchmark result.
+
+Still, the workflow is concrete and usable.
+
+### End-to-end workflow
+
+```mermaid
+flowchart LR
+    A["Scenario JSONL"] --> B["Prompt export"]
+    B --> C["Model predictions"]
+    C --> D["Structured evaluation"]
+    D --> E["Core metrics + family metrics + adjudication summaries"]
+```
+
+### Prompt-ready example
+
+The repository can export a scenario into prompt-ready JSONL for baseline experiments.
+
+```json
+{
+  "id": "mesotes_v2_test_0001",
+  "family_id": "family-donation-capacity",
+  "variant_type": "base",
+  "condition": "ontology_primed",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are evaluating a MESOTES item within an explicitly Aristotelian ontology. Return a JSON object after reasoning."
+    },
+    {
+      "role": "user",
+      "content": "Read the scenario and candidate actions, then predict the MESOTES fields..."
+    }
+  ]
+}
+```
+
+### What a minimal training-style setup looks like
+
+If you wanted to run a supervised or instruction-tuning style experiment, the shape would look like this:
+
+1. Use `train.jsonl` or `dev.jsonl` as labeled source data.
+2. Convert records into prompt/target pairs with the MESOTES prediction schema.
+3. Train or fine-tune a model to emit structured outputs.
+4. Evaluate on held-out items with `scripts/evaluate_predictions.py`.
+5. Inspect core metrics and family metrics together.
+
+Conceptually, the target output would look like:
+
+```json
+{
+  "id": "mesotes_v2_test_0001",
+  "primary_sphere": "wealth_resource_use",
+  "deficiency_action_id": "a1",
+  "excess_action_id": "a2",
+  "mean_action_id": "a3",
+  "false_midpoint_action_id": "a4",
+  "phronesis_salience": "medium",
+  "needs_more_info": false,
+  "no_mean_exception": false
+}
+```
+
+That is the benchmark's practical unit of learning and evaluation: not a single moral verdict, but a structured judgment.
+
+## The Kind Of Failure MESOTES Wants To Catch
+
+Imagine a release lead who discovers a hidden deployment blocker one hour before launch.
+
+- `deficiency`: say nothing and hope it disappears
+- `excess`: expose the teammate publicly
+- `false midpoint`: vaguely mention a concern but keep the launch moving
+- `mean`: pause the release, alert the right people, and address the teammate privately but firmly
+
+Why the false midpoint fails:
+
+- it sounds calm
+- it sounds balanced
+- it avoids overt aggression
+
+But it still misses the point because:
 
 - the stakes are asymmetric
-- the timing matters
-- the role matters
-- the public/private setting matters
+- the timing is urgent
+- the role carries obligation
+- partial vagueness becomes delay
 
-That is the kind of structure MESOTES is built to test.
+That is MESOTES in miniature.
 
-## What Makes MESOTES Different
+## What You Can Do In This Repo Right Now
 
-### 1. It is not a generic right/wrong dataset
-
-MESOTES is framework-fidelity oriented. It does not treat crowd agreement as the gold standard.
-
-### 2. It is explicitly built around Aristotelian failure modes
-
-The benchmark is centered on:
-
-- spheres of action or feeling
-- deficiency / excess / mean
-- false midpoint traps
-- phronesis and information gaps
-- no-mean exceptions
-
-### 3. It tests *change* as well as correctness
-
-`pilot_v2` includes counterfactual families so a model can be checked for:
-
-- staying invariant when only irrelevant details shift
-- responding when morally relevant details shift
-- tracking person-relative and role-relative changes
+| Task | Command |
+| --- | --- |
+| Install | `python -m pip install -e ".[dev]"` |
+| Validate the stronger pilot | `python scripts/validate_dataset.py data/pilot_v2/train.jsonl data/pilot_v2/dev.jsonl data/pilot_v2/test_inputs.jsonl data/pilot_v2/test_labels.jsonl` |
+| Run evaluation | `python scripts/evaluate_predictions.py data/pilot_v2/mock_predictions.jsonl data/pilot_v2/test_labels.jsonl` |
+| Export prompt-ready JSONL | `python scripts/export_model_prompts.py data/pilot_v2/test_inputs.jsonl data/pilot_v2/prompts_ontology.jsonl --condition ontology_primed` |
+| Summarize adjudication metadata | `python scripts/adjudication_report.py data/pilot_v2/train.jsonl data/pilot_v2/dev.jsonl data/pilot_v2/test_labels.jsonl` |
+| Build a markdown report | `python scripts/make_benchmark_report.py data/pilot_v2/train.jsonl data/pilot_v2/dev.jsonl data/pilot_v2/test_labels.jsonl --predictions data/pilot_v2/mock_predictions.jsonl --gold data/pilot_v2/test_labels.jsonl` |
 
 ## Two Pilot Releases
 
@@ -119,72 +228,7 @@ The benchmark is centered on:
 | `data/pilot/` | scaffold-era illustrative seed data | illustrative only |
 | `data/pilot_v2/` | research-validation pilot with harder traps, families, and adjudication metadata | illustrative only |
 
-Important: both pilots are demonstration data. They are useful for tooling, evaluation development, and baseline setup, but they are **not** benchmark-ready gold.
-
-## Quickstart
-
-### Install
-
-```bash
-python -m pip install -e ".[dev]"
-```
-
-### Validate the stronger pilot
-
-```bash
-python scripts/validate_dataset.py \
-  data/pilot_v2/train.jsonl \
-  data/pilot_v2/dev.jsonl \
-  data/pilot_v2/test_inputs.jsonl \
-  data/pilot_v2/test_labels.jsonl
-```
-
-### Run evaluation
-
-```bash
-python scripts/evaluate_predictions.py \
-  data/pilot_v2/mock_predictions.jsonl \
-  data/pilot_v2/test_labels.jsonl
-```
-
-### Export prompt-ready baseline inputs
-
-```bash
-python scripts/export_model_prompts.py \
-  data/pilot_v2/test_inputs.jsonl \
-  data/pilot_v2/prompts_ontology.jsonl \
-  --condition ontology_primed
-```
-
-### Generate adjudication and benchmark reports
-
-```bash
-python scripts/adjudication_report.py \
-  data/pilot_v2/train.jsonl \
-  data/pilot_v2/dev.jsonl \
-  data/pilot_v2/test_labels.jsonl
-```
-
-```bash
-python scripts/make_benchmark_report.py \
-  data/pilot_v2/train.jsonl \
-  data/pilot_v2/dev.jsonl \
-  data/pilot_v2/test_labels.jsonl \
-  --predictions data/pilot_v2/mock_predictions.jsonl \
-  --gold data/pilot_v2/test_labels.jsonl
-```
-
-For a more guided path, start with [docs/quickstart.md](docs/quickstart.md).
-
-## A Useful Mental Model
-
-MESOTES is best understood as a benchmark for three linked abilities:
-
-1. **Moral salience detection**: what kind of case is this?
-2. **Aristotelian structure tracking**: what counts as deficiency, excess, the mean, or a fake midpoint here?
-3. **Practical judgment under context**: what changes if the agent, role, stakes, or known facts change?
-
-That combination is what gives the repo its research value.
+Both pilots are demonstration data. They are useful for tooling, evaluation development, baseline design, and repo onboarding. They are **not** benchmark-ready gold.
 
 ## Metrics
 
@@ -205,44 +249,16 @@ That combination is what gives the repo its research value.
 - `salience_responsiveness_score`
 - `family_consistency_score`
 
-These should be read together. A model can be very stable and still be stably wrong.
+These should always be read together. A model can be stable and still be stably wrong.
 
-## Record Shape
-
-```json
-{
-  "id": "mesotes_v2_test_0001",
-  "split": "test",
-  "domain": "friendship",
-  "family_id": "family-donation-capacity",
-  "variant_type": "base",
-  "primary_sphere": "wealth_resource_use",
-  "relevant_factors": [
-    "resource_relative",
-    "relationship_sensitive",
-    "motive_sensitive"
-  ],
-  "gold": {
-    "mean_action_id": "a3",
-    "needs_more_info": false,
-    "no_mean_exception": false,
-    "annotation_confidence": "high",
-    "disagreement_flags": [],
-    "author_intended_trap_type": "numeric_split"
-  }
-}
-```
-
-The full schema is documented in [docs/benchmark_protocol.md](docs/benchmark_protocol.md).
-
-## Start Here
+## Where To Start
 
 If you are new to the project:
 
 1. Read [docs/project_overview.md](docs/project_overview.md) for the research framing.
 2. Read [docs/examples.md](docs/examples.md) for concrete benchmark walkthroughs.
-3. Run [docs/quickstart.md](docs/quickstart.md) end to end.
-4. Use [docs/baseline_experiments.md](docs/baseline_experiments.md) if you want to benchmark a model.
+3. Read [docs/quickstart.md](docs/quickstart.md) for the practical workflow.
+4. Read [docs/training_workflow.md](docs/training_workflow.md) if you want to see how dataset records become model inputs and structured targets.
 
 ## Repository Map
 
@@ -250,6 +266,7 @@ If you are new to the project:
 - [docs/philosophical_framework.md](docs/philosophical_framework.md)
 - [docs/examples.md](docs/examples.md)
 - [docs/quickstart.md](docs/quickstart.md)
+- [docs/training_workflow.md](docs/training_workflow.md)
 - [docs/dataset_card.md](docs/dataset_card.md)
 - [docs/benchmark_protocol.md](docs/benchmark_protocol.md)
 - [docs/baseline_experiments.md](docs/baseline_experiments.md)
@@ -260,12 +277,12 @@ If you are new to the project:
 
 ## Research Posture
 
-This repository is deliberately careful.
+This repository is intentionally careful.
 
 - It does not fabricate benchmark results.
 - It does not treat the included pilots as final gold.
-- It preserves disagreement instead of pretending every hard case is settled.
-- It aims to be useful for real research workflows now, while remaining honest about what has not yet been established.
+- It preserves disagreement rather than hiding it.
+- It is built to be useful now, while remaining honest about what is still illustrative.
 
 ## License
 

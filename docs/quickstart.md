@@ -73,6 +73,8 @@ Try the other baseline conditions too:
 - `ontology_primed`
 - `glossary_retrieval`
 
+If you want to understand how those exported records relate to training or fine-tuning workflows, read [docs/training_workflow.md](training_workflow.md).
+
 ## 6. Build a benchmark report
 
 ```bash
@@ -105,4 +107,5 @@ If you want the research-design path:
 1. [docs/project_overview.md](project_overview.md)
 2. [docs/philosophical_framework.md](philosophical_framework.md)
 3. [docs/baseline_experiments.md](baseline_experiments.md)
-4. [docs/analysis_plan.md](analysis_plan.md)
+4. [docs/training_workflow.md](training_workflow.md)
+5. [docs/analysis_plan.md](analysis_plan.md)
