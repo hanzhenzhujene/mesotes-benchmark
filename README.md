@@ -21,6 +21,8 @@
   <a href="#where-to-start">Start Here</a>
 </p>
 
+![MESOTES overview](docs/assets/mesotes-overview.svg)
+
 ## Purpose
 
 MESOTES exists to test a simple but important question:
