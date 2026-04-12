@@ -17,6 +17,7 @@
   <a href="#project-snapshot">Snapshot</a> •
   <a href="#what-the-dataset-looks-like">Dataset</a> •
   <a href="#what-training-or-evaluation-looks-like">Training</a> •
+  <a href="#what-you-get-after-one-run">Scorecard</a> •
   <a href="#quickstart">Quickstart</a> •
   <a href="#where-to-start">Start Here</a>
 </p>
@@ -213,6 +214,32 @@ If you run a supervised or instruction-tuning style setup, the target shape look
 That is MESOTES's practical unit of learning and evaluation: not a single moral verdict, but a structured judgment.
 
 For the fuller workflow, see [docs/training_workflow.md](docs/training_workflow.md).
+
+## What You Get After One Run
+
+![MESOTES benchmark scorecard](docs/assets/mesotes-scorecard.svg)
+
+A normal MESOTES evaluation run gives you more than one number:
+
+- **core task performance**, such as sphere identification and action-role accuracy
+- **counterfactual behavior**, such as whether the model stays invariant to irrelevant shifts and responds to salient ones
+- **review pressure**, such as which items carry disagreement flags or low annotation confidence
+
+### Demo report snapshot
+
+The table below is produced from the included `mock_predictions.jsonl`. It is a tooling demonstration, **not** a benchmark claim.
+
+| Metric | Demo value |
+| --- | --- |
+| `sphere_accuracy` | `1.0000` |
+| `action_role_accuracy` | `0.8036` |
+| `midpoint_trap_error_rate` | `0.2857` |
+| `nuisance_invariance_score` | `1.0000` |
+| `salience_responsiveness_score` | `0.6667` |
+| `family_consistency_score` | `0.7500` |
+| `composite_score` | `0.8844` |
+
+The point of this snapshot is format, not performance. It shows the kind of report structure MESOTES is designed to support.
 
 ## A Concrete Failure MESOTES Wants To Catch
 

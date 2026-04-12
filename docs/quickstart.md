@@ -42,6 +42,18 @@ What to notice:
 
 The included mock predictions are for tooling demonstration only. They are not research claims.
 
+Example output excerpt:
+
+```text
+MESOTES evaluation report
+- sphere_accuracy: 1.0000
+- action_role_accuracy: 0.8036
+- midpoint_trap_error_rate: 0.2857
+- nuisance_invariance_score: 1.0000
+- salience_responsiveness_score: 0.6667
+- family_consistency_score: 0.7500
+```
+
 ## 4. Generate an adjudication summary
 
 ```bash

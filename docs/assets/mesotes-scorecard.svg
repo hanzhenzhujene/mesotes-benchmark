@@ -1,0 +1,90 @@
+<svg width="1200" height="620" viewBox="0 0 1200 620" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">MESOTES benchmark scorecard</title>
+  <desc id="desc">A visual summary of the three reporting layers produced by a MESOTES run: core task metrics, counterfactual family behavior, and annotation review metadata.</desc>
+  <rect width="1200" height="620" rx="28" fill="#F7F3EA"/>
+  <rect x="36" y="36" width="1128" height="548" rx="24" fill="#FFFDFC" stroke="#D8CFC1" stroke-width="2"/>
+
+  <text x="70" y="98" fill="#1E2A38" font-family="Georgia, 'Times New Roman', serif" font-size="38" font-weight="700">
+    What a MESOTES run gives you
+  </text>
+  <text x="70" y="132" fill="#4A5562" font-family="Arial, Helvetica, sans-serif" font-size="20">
+    The benchmark is meant to surface structured judgment behavior, not just one leaderboard number.
+  </text>
+
+  <rect x="70" y="176" width="320" height="286" rx="20" fill="#EEF6FF" stroke="#7AA8D8" stroke-width="2"/>
+  <text x="94" y="214" fill="#0B57D0" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">
+    CORE TASK SIGNAL
+  </text>
+  <text x="94" y="252" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
+    Did the model get the
+  </text>
+  <text x="94" y="282" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
+    judgment structure right?
+  </text>
+  <text x="94" y="326" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="19">
+    sphere_accuracy
+  </text>
+  <text x="94" y="356" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="19">
+    action_role_accuracy
+  </text>
+  <text x="94" y="386" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="19">
+    midpoint_trap_error_rate
+  </text>
+  <text x="94" y="416" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="19">
+    phronesis_salience_accuracy
+  </text>
+
+  <rect x="440" y="176" width="320" height="286" rx="20" fill="#F3ECFF" stroke="#A58AD6" stroke-width="2"/>
+  <text x="464" y="214" fill="#6C3FB2" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">
+    FAMILY BEHAVIOR
+  </text>
+  <text x="464" y="252" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
+    Does the model stay stable
+  </text>
+  <text x="464" y="282" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
+    when it should, and change
+  </text>
+  <text x="464" y="312" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
+    when it should?
+  </text>
+  <text x="464" y="356" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="19">
+    nuisance_invariance_score
+  </text>
+  <text x="464" y="386" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="19">
+    salience_responsiveness_score
+  </text>
+  <text x="464" y="416" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="19">
+    family_consistency_score
+  </text>
+
+  <rect x="810" y="176" width="320" height="286" rx="20" fill="#EAF8F0" stroke="#75B58E" stroke-width="2"/>
+  <text x="834" y="214" fill="#0A7E3B" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">
+    REVIEW LAYER
+  </text>
+  <text x="834" y="252" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
+    Which items are clean,
+  </text>
+  <text x="834" y="282" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
+    disputed, or likely to need
+  </text>
+  <text x="834" y="312" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
+    expert adjudication?
+  </text>
+  <text x="834" y="356" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="19">
+    annotation_confidence
+  </text>
+  <text x="834" y="386" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="19">
+    disagreement_flags
+  </text>
+  <text x="834" y="416" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="19">
+    adjudication_report summaries
+  </text>
+
+  <rect x="70" y="492" width="1060" height="56" rx="16" fill="#FFF5E8" stroke="#DDBB73" stroke-width="2"/>
+  <text x="96" y="528" fill="#7B5600" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700">
+    Read these together:
+  </text>
+  <text x="266" y="528" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="19">
+    a model can be consistent and still be consistently wrong, or accurate on items but brittle across families.
+  </text>
+</svg>

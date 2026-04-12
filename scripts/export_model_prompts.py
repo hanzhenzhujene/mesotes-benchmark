@@ -136,7 +136,7 @@ def _render_record(record: ScenarioRecord | ScenarioInputRecord) -> str:
         [
             f"ID: {record.id}",
             f"Domain: {record.domain}",
-            f"Primary sphere candidates should come from the MESOTES ontology.",
+            "Primary sphere candidates should come from the MESOTES ontology.",
             (
                 "Agent profile: "
                 f"role={record.agent_profile.role}; "
