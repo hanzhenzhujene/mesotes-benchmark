@@ -49,6 +49,15 @@ If you only take away three things from this repository, they should be these:
 2. **The benchmark is built to catch false moderation.** Many models prefer the balanced-looking answer even when it is not the mean.
 3. **MESOTES tests change, not only correctness.** Counterfactual families ask whether a model stays stable when it should and changes when it should.
 
+## Who This Repo Is For
+
+| If you are... | MESOTES helps you... | Start with |
+| --- | --- | --- |
+| a benchmark researcher | evaluate structured Aristotelian reasoning instead of generic verdict prediction | [docs/project_overview.md](docs/project_overview.md) |
+| an LLM evaluator | export prompt-ready JSONL and score predictions with core and family metrics | [docs/quickstart.md](docs/quickstart.md) |
+| an annotation designer | inspect disagreement, confidence, and adjudication structure | [annotation/guidelines.md](annotation/guidelines.md) |
+| a first-time visitor | understand the benchmark logic fast, with concrete examples | [docs/examples.md](docs/examples.md) |
+
 ## Why MESOTES Is Different
 
 | Typical moral benchmark question | MESOTES question |
@@ -94,6 +103,10 @@ Every MESOTES item is a concrete situation with:
 - structured Aristotelian labels
 - optional family metadata for counterfactual analysis
 - annotation-confidence and disagreement metadata
+
+### Record anatomy
+
+![MESOTES record anatomy](docs/assets/mesotes-record-anatomy.svg)
 
 ### Example record
 
@@ -141,6 +154,8 @@ Every MESOTES item is a concrete situation with:
 - The case is about **wealth/resource use**
 - `a4` is a trap because it sounds balanced but ignores what is proportionate *for this agent*
 - the family metadata means this item belongs to a counterfactual set where the same outward donation options are tested under a different agent profile
+
+In other words, the benchmark asks the model to predict a *judgment structure*, not just a verdict.
 
 ## What Training Or Evaluation Looks Like
 
@@ -236,6 +251,16 @@ That is MESOTES in miniature.
 
 For a more guided path, start with [docs/quickstart.md](docs/quickstart.md).
 
+## If You Want One Clear Workflow
+
+1. Validate `pilot_v2`.
+2. Export prompt-ready JSONL under one baseline condition.
+3. Run a model and collect `PredictionRecord` outputs.
+4. Evaluate with MESOTES metrics.
+5. Inspect family behavior and disagreement-heavy cases.
+
+That is the shortest path from repository clone to actual benchmark use.
+
 ## Two Pilot Releases
 
 | Folder | Purpose | Status |
@@ -274,6 +299,8 @@ If you are new to the project:
 2. Read [docs/examples.md](docs/examples.md) for concrete benchmark walkthroughs.
 3. Read [docs/quickstart.md](docs/quickstart.md) for the practical workflow.
 4. Read [docs/training_workflow.md](docs/training_workflow.md) for dataset-to-model examples.
+
+If you only read one supporting document after the README, make it [docs/quickstart.md](docs/quickstart.md).
 
 ## Repository Map
 
