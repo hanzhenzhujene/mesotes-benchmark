@@ -15,6 +15,7 @@
 <p align="center">
   <a href="#purpose">Purpose</a> •
   <a href="#project-snapshot">Snapshot</a> •
+  <a href="#how-mesotes-is-built">Build</a> •
   <a href="#what-the-dataset-looks-like">Dataset</a> •
   <a href="#what-training-or-evaluation-looks-like">Training</a> •
   <a href="#what-you-get-after-one-run">Scorecard</a> •
@@ -81,6 +82,21 @@ flowchart LR
 ```
 
 This is a dataset overview, not a benchmark result claim.
+
+## How MESOTES Is Built
+
+![How MESOTES is built](docs/assets/mesotes-build-pipeline.svg)
+
+MESOTES is built as a layered benchmark pipeline rather than a flat morality dataset:
+
+- **start from a philosophical target**: Aristotelian judgment, not generic verdict prediction
+- **operationalize that target** into spheres, action roles, explanation tags, and information-gap labels
+- **author adversarial cases** that force the model to reject false moderation and handle under-specified or no-mean cases
+- **group variants into families** so the benchmark can test when a model should stay stable and when it should change
+- **track label quality explicitly** through confidence, disagreement flags, and adjudication notes
+- **score structured outputs** with both core accuracy metrics and family-aware robustness metrics
+
+This is why MESOTES is better understood as a research evaluation framework with dataset artifacts, not just as a collection of scenarios.
 
 ## The Core Logic
 
