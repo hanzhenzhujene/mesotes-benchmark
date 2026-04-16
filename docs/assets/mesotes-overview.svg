@@ -1,108 +1,71 @@
-<svg width="1200" height="620" viewBox="0 0 1200 620" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<svg width="1200" height="720" viewBox="0 0 1200 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">MESOTES overview</title>
-  <desc id="desc">A visual overview of the MESOTES benchmark, showing purpose, Aristotelian task structure, and counterfactual family evaluation.</desc>
-  <rect width="1200" height="620" rx="28" fill="#F7F3EA"/>
-  <rect x="36" y="36" width="1128" height="548" rx="24" fill="#FFFDFC" stroke="#D8CFC1" stroke-width="2"/>
+  <desc id="desc">A clear overview of MESOTES showing the core research question, pilot snapshot, and the three kinds of capability the benchmark evaluates.</desc>
+  <defs>
+    <style>
+      .title { fill: #1E2A38; font-family: Georgia, 'Times New Roman', serif; font-size: 40px; font-weight: 700; }
+      .subtitle { fill: #556270; font-family: Arial, Helvetica, sans-serif; font-size: 20px; }
+      .label { font-family: Arial, Helvetica, sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1px; }
+      .cardtitle { fill: #1E2A38; font-family: Arial, Helvetica, sans-serif; font-size: 24px; font-weight: 700; }
+      .body { fill: #425164; font-family: Arial, Helvetica, sans-serif; font-size: 18px; }
+      .statnum { fill: #1E2A38; font-family: Arial, Helvetica, sans-serif; font-size: 30px; font-weight: 700; }
+      .statlabel { fill: #5E6A75; font-family: Arial, Helvetica, sans-serif; font-size: 16px; }
+      .footer { fill: #6A7684; font-family: Arial, Helvetica, sans-serif; font-size: 17px; }
+    </style>
+  </defs>
 
-  <text x="70" y="98" fill="#1E2A38" font-family="Georgia, 'Times New Roman', serif" font-size="38" font-weight="700">
-    MESOTES
-  </text>
-  <text x="70" y="132" fill="#4A5562" font-family="Arial, Helvetica, sans-serif" font-size="20">
-    An Aristotelian benchmark for phronesis, the doctrine of the mean, and counterfactual moral reasoning
-  </text>
+  <rect width="1200" height="720" rx="28" fill="#F7F3EA"/>
+  <rect x="34" y="34" width="1132" height="652" rx="24" fill="#FFFDFC" stroke="#D8CFC1" stroke-width="2"/>
 
-  <rect x="70" y="170" width="500" height="148" rx="20" fill="#FFF8E8" stroke="#DDBB73" stroke-width="2"/>
-  <text x="95" y="208" fill="#8A5B00" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">
-    WHAT MESOTES IS TRYING TO MEASURE
-  </text>
-  <text x="95" y="246" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
-    Can a model reason Aristotelianly in context
-  </text>
-  <text x="95" y="279" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="20">
-    rather than merely producing ethical-sounding answers?
-  </text>
+  <text x="70" y="96" class="title">MESOTES</text>
+  <text x="70" y="128" class="subtitle">An Aristotelian benchmark for structured judgment, false-midpoint rejection,</text>
+  <text x="70" y="154" class="subtitle">and counterfactual moral reasoning.</text>
 
-  <rect x="600" y="170" width="520" height="148" rx="20" fill="#EEF6FF" stroke="#7AA8D8" stroke-width="2"/>
-  <text x="625" y="208" fill="#0B57D0" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">
-    PILOT V2 SNAPSHOT
-  </text>
-  <text x="625" y="248" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">
-    32 items • 8 spheres • 8 families
-  </text>
-  <text x="625" y="282" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="19">
-    30 false-midpoint cases • 7 needs-more-info • 6 no-mean exceptions
-  </text>
+  <rect x="70" y="188" width="520" height="158" rx="20" fill="#FFF8E8" stroke="#DDBB73" stroke-width="2"/>
+  <text x="96" y="224" class="label" fill="#8A5B00">CORE RESEARCH QUESTION</text>
+  <text x="96" y="262" class="cardtitle">Can a model judge well in context,</text>
+  <text x="96" y="294" class="cardtitle">rather than simply sound ethical?</text>
+  <text x="96" y="326" class="body">Framework fidelity, not generic verdict prediction.</text>
 
-  <rect x="70" y="352" width="220" height="164" rx="18" fill="#F3ECFF" stroke="#A58AD6" stroke-width="2"/>
-  <text x="94" y="388" fill="#6C3FB2" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">
-    STEP 1
-  </text>
-  <text x="94" y="424" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
-    Find the
-  </text>
-  <text x="94" y="454" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
-    relevant sphere
-  </text>
-  <text x="94" y="492" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="18">
-    fear, anger, honor,
-  </text>
-  <text x="94" y="516" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="18">
-    truthfulness, humor, etc.
-  </text>
+  <rect x="610" y="188" width="520" height="158" rx="20" fill="#EEF6FF" stroke="#7AA8D8" stroke-width="2"/>
+  <text x="636" y="224" class="label" fill="#0B57D0">PILOT V2 AT A GLANCE</text>
+  <rect x="636" y="246" width="108" height="72" rx="14" fill="#FFFFFF"/>
+  <rect x="760" y="246" width="108" height="72" rx="14" fill="#FFFFFF"/>
+  <rect x="884" y="246" width="108" height="72" rx="14" fill="#FFFFFF"/>
+  <rect x="1008" y="246" width="96" height="72" rx="14" fill="#FFFFFF"/>
+  <text x="668" y="276" class="statnum">32</text>
+  <text x="654" y="300" class="statlabel">items</text>
+  <text x="794" y="276" class="statnum">8</text>
+  <text x="777" y="300" class="statlabel">spheres</text>
+  <text x="918" y="276" class="statnum">8</text>
+  <text x="899" y="300" class="statlabel">families</text>
+  <text x="1028" y="276" class="statnum">30</text>
+  <text x="1017" y="300" class="statlabel">trap cases</text>
+  <text x="636" y="334" class="body">Includes under-specified items and no-mean exceptions.</text>
 
-  <rect x="330" y="352" width="220" height="164" rx="18" fill="#EAF8F0" stroke="#75B58E" stroke-width="2"/>
-  <text x="354" y="388" fill="#0A7E3B" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">
-    STEP 2
-  </text>
-  <text x="354" y="424" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
-    Distinguish
-  </text>
-  <text x="354" y="454" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
-    deficiency / excess /
-  </text>
-  <text x="354" y="484" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
-    mean
-  </text>
+  <text x="70" y="386" class="label" fill="#6A7684">WHAT MODELS MUST DO</text>
 
-  <rect x="590" y="352" width="220" height="164" rx="18" fill="#FFF1EF" stroke="#D88C82" stroke-width="2"/>
-  <text x="614" y="388" fill="#B74C3D" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">
-    STEP 3
-  </text>
-  <text x="614" y="424" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
-    Reject fake
-  </text>
-  <text x="614" y="454" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
-    moderation
-  </text>
-  <text x="614" y="492" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="18">
-    the balanced-looking
-  </text>
-  <text x="614" y="516" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="18">
-    answer can still be wrong
-  </text>
+  <rect x="70" y="410" width="340" height="190" rx="20" fill="#F3ECFF" stroke="#A58AD6" stroke-width="2"/>
+  <text x="96" y="446" class="label" fill="#6C3FB2">1. STRUCTURE THE JUDGMENT</text>
+  <text x="96" y="484" class="cardtitle">Identify the sphere and the</text>
+  <text x="96" y="516" class="cardtitle">roles of the candidate actions</text>
+  <text x="96" y="554" class="body">primary sphere</text>
+  <text x="96" y="580" class="body">deficiency / excess / mean</text>
 
-  <rect x="850" y="352" width="270" height="164" rx="18" fill="#EEF3FA" stroke="#8FA8C1" stroke-width="2"/>
-  <text x="874" y="388" fill="#35516F" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">
-    STEP 4
-  </text>
-  <text x="874" y="424" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
-    Test phronesis and
-  </text>
-  <text x="874" y="454" fill="#1E2A38" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">
-    counterfactual change
-  </text>
-  <text x="874" y="492" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="18">
-    does the model ask for more info,
-  </text>
-  <text x="874" y="516" fill="#425164" font-family="Arial, Helvetica, sans-serif" font-size="18">
-    stay stable, and shift when needed?
-  </text>
+  <rect x="430" y="410" width="340" height="190" rx="20" fill="#FFF1EF" stroke="#D88C82" stroke-width="2"/>
+  <text x="456" y="446" class="label" fill="#B74C3D">2. AVOID SHALLOW MODERATION</text>
+  <text x="456" y="484" class="cardtitle">Reject fake balance and know</text>
+  <text x="456" y="516" class="cardtitle">when judgment is under-specified</text>
+  <text x="456" y="554" class="body">false midpoint traps</text>
+  <text x="456" y="580" class="body">needs-more-info / no-mean cases</text>
 
-  <path d="M290 434H330" stroke="#9A8BAF" stroke-width="4" stroke-linecap="round"/>
-  <path d="M550 434H590" stroke="#89A98E" stroke-width="4" stroke-linecap="round"/>
-  <path d="M810 434H850" stroke="#B18A84" stroke-width="4" stroke-linecap="round"/>
+  <rect x="790" y="410" width="340" height="190" rx="20" fill="#EAF8F0" stroke="#75B58E" stroke-width="2"/>
+  <text x="816" y="446" class="label" fill="#0A7E3B">3. BEHAVE CORRECTLY UNDER CHANGE</text>
+  <text x="816" y="484" class="cardtitle">Stay stable under nuisance shifts</text>
+  <text x="816" y="516" class="cardtitle">and change when salience shifts</text>
+  <text x="816" y="554" class="body">counterfactual family analysis</text>
+  <text x="816" y="580" class="body">agent / role / salience / detail shifts</text>
 
-  <text x="70" y="560" fill="#6A7684" font-family="Arial, Helvetica, sans-serif" font-size="17">
-    MESOTES is framework-fidelity oriented: it scores structured Aristotelian judgment, not generic verdict prediction.
-  </text>
+  <text x="70" y="646" class="footer">MESOTES evaluates structured Aristotelian judgment:</text>
+  <text x="70" y="670" class="footer">what matters, what is too little or too much, and when changing context should change the answer.</text>
 </svg>
